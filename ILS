@@ -32,3 +32,21 @@ def swap_on_the_spoke(X):
             #new_neighbour.sort()
             neighbours.append(new_neighbour)
     return neighbours
+    
+def re_allocation(X):
+    neighbours = []
+    hub, spoke = hub_spoke(X)
+    for i in range(len(spoke)):
+        new_neighbour=X.copy()
+        current_hub=0
+        new_hub=hub.copy()
+        for k in range(len(X)):
+            if X[k][1]==spoke[i]:
+                current_hub=X[k][0]
+                new_hub.remove(current_hub)
+                new_neighbour.remove((current_hub,spoke[i]))
+        for x in new_hub:
+            final_neighbour=new_neighbour.copy()
+            final_neighbour.append((x,spoke[i]))
+            neighbours.append(final_neighbour)
+    return neighbours
